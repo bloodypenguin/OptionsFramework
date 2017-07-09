@@ -1,7 +1,7 @@
 ﻿using System;
-using OptionsFramework.Attibutes;
+using ImprovedPublicTransport2.OptionsFramework.Attibutes;
 
-namespace OptionsFramework.Extensions
+namespace ImprovedPublicTransport2.OptionsFramework.Extensions
 {
     public static class CommonExtensions
     {

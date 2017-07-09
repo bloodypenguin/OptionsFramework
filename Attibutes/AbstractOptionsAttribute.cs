@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace OptionsFramework.Attibutes
+namespace ImprovedPublicTransport2.OptionsFramework.Attibutes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public abstract class AbstractOptionsAttribute : Attribute

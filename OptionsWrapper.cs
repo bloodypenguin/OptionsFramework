@@ -3,10 +3,10 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 using ColossalFramework.IO;
-using OptionsFramework.Attibutes;
+using ImprovedPublicTransport2.OptionsFramework.Attibutes;
 using UnityEngine;
 
-namespace OptionsFramework
+namespace ImprovedPublicTransport2.OptionsFramework
 {
     public class OptionsWrapper<T>
     {

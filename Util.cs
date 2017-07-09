@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace OptionsFramework
+namespace ImprovedPublicTransport2.OptionsFramework
 {
     internal class Util
     {
