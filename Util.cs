@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace OptionsFramework
+namespace PropSnapping.OptionsFramework
 {
     internal class Util
     {

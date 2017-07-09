@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OptionsFramework.Attibutes
+namespace PropSnapping.OptionsFramework.Attibutes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class LabelAttribute : AbstractOptionsAttribute

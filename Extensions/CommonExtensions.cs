@@ -1,7 +1,7 @@
 ﻿using System;
-using OptionsFramework.Attibutes;
+using PropSnapping.OptionsFramework.Attibutes;
 
-namespace OptionsFramework.Extensions
+namespace PropSnapping.OptionsFramework.Extensions
 {
     public static class CommonExtensions
     {
