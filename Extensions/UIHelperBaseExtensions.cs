@@ -6,11 +6,11 @@ using System.Linq;
 using System.Reflection;
 using ColossalFramework.Plugins;
 using ColossalFramework.UI;
-using OptionsFramework.Attibutes;
+using NaturalResourcesBrush.OptionsFramework.Attibutes;
 using ICities;
 using UnityEngine;
 
-namespace OptionsFramework.Extensions
+namespace NaturalResourcesBrush.OptionsFramework.Extensions
 {
     public static class UIHelperBaseExtensions
     {

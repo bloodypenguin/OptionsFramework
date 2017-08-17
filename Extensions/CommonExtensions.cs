@@ -1,7 +1,7 @@
 ﻿using System;
-using OptionsFramework.Attibutes;
+using NaturalResourcesBrush.OptionsFramework.Attibutes;
 
-namespace OptionsFramework.Extensions
+namespace NaturalResourcesBrush.OptionsFramework.Extensions
 {
     public static class CommonExtensions
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OptionsFramework.Attibutes
+namespace NaturalResourcesBrush.OptionsFramework.Attibutes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class CheckboxAttribute : AbstractOptionsAttribute

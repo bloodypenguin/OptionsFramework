@@ -3,10 +3,10 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 using ColossalFramework.IO;
-using OptionsFramework.Attibutes;
+using NaturalResourcesBrush.OptionsFramework.Attibutes;
 using UnityEngine;
 
-namespace OptionsFramework
+namespace NaturalResourcesBrush.OptionsFramework
 {
     public class OptionsWrapper<T>
     {

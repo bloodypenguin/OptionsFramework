@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace OptionsFramework.Attibutes
+namespace NaturalResourcesBrush.OptionsFramework.Attibutes
 {
     [AttributeUsage(AttributeTargets.All)]
     public class DontTranslateDescriptionAttribute : DescriptionAttribute
