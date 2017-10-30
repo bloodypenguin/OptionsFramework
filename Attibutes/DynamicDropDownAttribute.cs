@@ -15,7 +15,7 @@ namespace SkyboxReplacer.OptionsFramework.Attibutes
             this.Populator = () =>
             {
                 var method = Util.FindType(populatorClass).GetMethod(populatorMethod, BindingFlags.Public | BindingFlags.Static);
-                return (List<DropDownEntry<string>>)method.Invoke(null, new object[] { });
+                return (DropDownEntry<string>[])method.Invoke(null, new object[] { });
             };
         }
 
@@ -26,9 +26,9 @@ namespace SkyboxReplacer.OptionsFramework.Attibutes
                     let code = entry.Code
                     let description = entry.Description
                     let translatedDesctiption = translator == null ? description : translator.Invoke(description)
-                    select new DropDownEntry<string>(code, translatedDesctiption)).ToList();
+                    select new DropDownEntry<string>(code, translatedDesctiption)).ToArray();
         }
 
-        private Func<List<DropDownEntry<string>>> Populator { get; }
+        private Func<DropDownEntry<string>[]> Populator { get; }
     }
 }

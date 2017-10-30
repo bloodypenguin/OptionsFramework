@@ -24,7 +24,7 @@ namespace SkyboxReplacer.OptionsFramework.Attibutes
                 let attributes = memInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false)
                 let description = ((DescriptionAttribute) attributes[0]).Description
                 let translatedDesctiption = translator == null ? description : translator.Invoke(description)
-                select new DropDownEntry<int>(code, translatedDesctiption)).ToList();
+                select new DropDownEntry<int>(code, translatedDesctiption)).ToArray();
         }
 
         private string ItemsClass { get; }
