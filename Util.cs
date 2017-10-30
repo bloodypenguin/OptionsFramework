@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace OptionsFramework
+namespace SkyboxReplacer.OptionsFramework
 {
     internal class Util
     {

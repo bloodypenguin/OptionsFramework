@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OptionsFramework.Attibutes
+namespace SkyboxReplacer.OptionsFramework.Attibutes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class SliderAttribute : AbstractOptionsAttribute

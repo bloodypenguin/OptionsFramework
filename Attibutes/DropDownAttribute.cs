@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
-namespace OptionsFramework.Attibutes
+namespace SkyboxReplacer.OptionsFramework.Attibutes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class DropDownAttribute : AbstractOptionsAttribute

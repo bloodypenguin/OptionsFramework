@@ -1,7 +1,7 @@
 ﻿using System;
-using OptionsFramework.Attibutes;
+using SkyboxReplacer.OptionsFramework.Attibutes;
 
-namespace OptionsFramework.Extensions
+namespace SkyboxReplacer.OptionsFramework.Extensions
 {
     public static class CommonExtensions
     {
