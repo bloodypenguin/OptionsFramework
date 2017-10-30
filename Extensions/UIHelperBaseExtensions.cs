@@ -78,10 +78,15 @@ namespace SkyboxReplacer.OptionsFramework.Extensions
             {
                 component = group.AddTextfield<T>(description, propertyName, textfieldAttribute);
             }
-            var dropDownAttribute = OptionsWrapper<T>.Options.GetAttribute<T, DropDownAttribute>(propertyName);
-            if (dropDownAttribute != null)
+            var enumDropDownAttribute = OptionsWrapper<T>.Options.GetAttribute<T, EnumDropDownAttribute>(propertyName);
+            if (enumDropDownAttribute != null)
             {
-                component = group.AddDropdown<T>(description, propertyName, dropDownAttribute, translator);
+                component = group.AddEnumDropdown<T>(description, propertyName, enumDropDownAttribute, translator);
+            }
+            var dynamicDropDownAttribute = OptionsWrapper<T>.Options.GetAttribute<T, DynamicDropDownAttribute>(propertyName);
+            if (dynamicDropDownAttribute != null)
+            {
+                component = group.AddDynamicDropdown<T>(description, propertyName, dynamicDropDownAttribute, translator);
             }
             var sliderAttribute = OptionsWrapper<T>.Options.GetAttribute<T, SliderAttribute>(propertyName);
             if (sliderAttribute != null)
@@ -108,7 +113,7 @@ namespace SkyboxReplacer.OptionsFramework.Extensions
             return component;
         }
 
-        private static UIDropDown AddDropdown<T>(this UIHelperBase group, string text, string propertyName, DropDownAttribute attr, Func<string, string> translator = null)
+        private static UIDropDown AddEnumDropdown<T>(this UIHelperBase group, string text, string propertyName, EnumDropDownAttribute attr, Func<string, string> translator = null)
         {
             var property = typeof(T).GetProperty(propertyName);
             var defaultCode = (int)property.GetValue(OptionsWrapper<T>.Options, null);
@@ -116,20 +121,46 @@ namespace SkyboxReplacer.OptionsFramework.Extensions
             var items = attr.GetItems(translator);
             try
             {
-                defaultSelection = items.First(kvp => kvp.Value == defaultCode).Value;
+                defaultSelection = items.First(kvp => kvp.Code == defaultCode).Code;
             }
             catch
             {
                 defaultSelection = 0;
-                property.SetValue(OptionsWrapper<T>.Options, items.First().Value, null);
+                property.SetValue(OptionsWrapper<T>.Options, items.First().Code, null);
             }
-            return (UIDropDown)group.AddDropdown(text, items.Select(kvp => kvp.Key).ToArray(), defaultSelection, sel =>
+            return (UIDropDown)group.AddDropdown(text, items.Select(kvp => kvp.Description).ToArray(), defaultSelection, sel =>
            {
-               var code = items[sel].Value;
+               var code = items[sel].Code;
                property.SetValue(OptionsWrapper<T>.Options, code, null);
                OptionsWrapper<T>.SaveOptions();
                attr.Action<int>().Invoke(code);
            });
+        }
+
+        private static UIDropDown AddDynamicDropdown<T>(this UIHelperBase group, string text, string propertyName, DynamicDropDownAttribute attr, Func<string, string> translator = null)
+        {
+            var property = typeof(T).GetProperty(propertyName);
+            var defaultCode = (string)property.GetValue(OptionsWrapper<T>.Options, null);
+            int defaultSelection;
+            var items = attr.GetItems(translator);
+            var keys = items.Select(i => i.Code).ToArray();
+            var dictionary = items.ToDictionary(kvp => kvp.Code, kvp => kvp.Description);
+            try
+            {
+                defaultSelection = Array.IndexOf(keys, defaultCode);
+            }
+            catch
+            {
+                defaultSelection = 0;
+                property.SetValue(OptionsWrapper<T>.Options, keys.First(), null);
+            }
+            return (UIDropDown)group.AddDropdown(text, keys.Select(key => dictionary[key]).ToArray(), defaultSelection, sel =>
+            {
+                var code = keys[sel];
+                property.SetValue(OptionsWrapper<T>.Options, code, null);
+                OptionsWrapper<T>.SaveOptions();
+                attr.Action<string>().Invoke(code);
+            });
         }
 
         private static UICheckBox AddCheckbox<T>(this UIHelperBase group, string text, string propertyName, CheckboxAttribute attr)
