@@ -151,6 +151,10 @@ namespace OptionsFramework.Extensions
             }
             catch
             {
+                defaultSelection = -1;
+            }
+            if (defaultSelection == -1)
+            {
                 defaultSelection = 0;
                 property.SetValue(OptionsWrapper<T>.Options, keys.First(), null);
             }
