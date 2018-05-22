@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 
-namespace SkyboxReplacer.OptionsFramework.Attibutes
+namespace OptionsFramework.Attibutes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class DynamicDropDownAttribute : DropDownAttribute

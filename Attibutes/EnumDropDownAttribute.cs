@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
-namespace SkyboxReplacer.OptionsFramework.Attibutes
+namespace OptionsFramework.Attibutes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class EnumDropDownAttribute : DropDownAttribute
