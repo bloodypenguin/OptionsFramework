@@ -1,7 +1,7 @@
 ﻿using System;
-using OptionsFramework.Attibutes;
+using Parkify.OptionsFramework.Attibutes;
 
-namespace OptionsFramework.Extensions
+namespace Parkify.OptionsFramework.Extensions
 {
     public static class CommonExtensions
     {

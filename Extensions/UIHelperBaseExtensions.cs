@@ -6,11 +6,11 @@ using System.Linq;
 using System.Reflection;
 using ColossalFramework.Plugins;
 using ColossalFramework.UI;
-using OptionsFramework.Attibutes;
+using Parkify.OptionsFramework.Attibutes;
 using ICities;
 using UnityEngine;
 
-namespace OptionsFramework.Extensions
+namespace Parkify.OptionsFramework.Extensions
 {
     public static class UIHelperBaseExtensions
     {

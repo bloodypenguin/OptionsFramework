@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OptionsFramework.Attibutes
+namespace Parkify.OptionsFramework.Attibutes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class ButtonAttribute : AbstractOptionsAttribute
