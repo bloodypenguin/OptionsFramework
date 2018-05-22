@@ -1,4 +1,4 @@
-﻿namespace SkyboxReplacer.OptionsFramework.Attibutes
+﻿namespace OptionsFramework.Attibutes
 {
     public struct DropDownEntry<TKey>
     {
