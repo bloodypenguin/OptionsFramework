@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using ColossalFramework;
 
-namespace OptionsFramework.Attibutes
+namespace TreeUnlimiter.OptionsFramework.Attibutes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public abstract class DropDownAttribute : AbstractOptionsAttribute

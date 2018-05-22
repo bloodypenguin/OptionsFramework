@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OptionsFramework.Attibutes
+namespace TreeUnlimiter.OptionsFramework.Attibutes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public abstract class HideConditionAttribute : Attribute

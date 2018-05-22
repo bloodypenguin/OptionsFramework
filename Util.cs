@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace OptionsFramework
+namespace TreeUnlimiter.OptionsFramework
 {
     internal class Util
     {

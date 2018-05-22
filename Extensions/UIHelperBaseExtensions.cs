@@ -4,13 +4,12 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using ColossalFramework.Plugins;
 using ColossalFramework.UI;
-using OptionsFramework.Attibutes;
 using ICities;
+using TreeUnlimiter.OptionsFramework.Attibutes;
 using UnityEngine;
 
-namespace OptionsFramework.Extensions
+namespace TreeUnlimiter.OptionsFramework.Extensions
 {
     public static class UIHelperBaseExtensions
     {

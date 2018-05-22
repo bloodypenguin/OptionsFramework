@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace OptionsFramework.Attibutes
+namespace TreeUnlimiter.OptionsFramework.Attibutes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public abstract class AbstractOptionsAttribute : Attribute

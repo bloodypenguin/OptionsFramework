@@ -3,10 +3,10 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 using ColossalFramework.IO;
-using OptionsFramework.Attibutes;
+using TreeUnlimiter.OptionsFramework.Attibutes;
 using UnityEngine;
 
-namespace OptionsFramework
+namespace TreeUnlimiter.OptionsFramework
 {
     public class OptionsWrapper<T>
     {

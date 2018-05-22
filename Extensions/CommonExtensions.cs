@@ -1,7 +1,7 @@
 ﻿using System;
-using OptionsFramework.Attibutes;
+using TreeUnlimiter.OptionsFramework.Attibutes;
 
-namespace OptionsFramework.Extensions
+namespace TreeUnlimiter.OptionsFramework.Extensions
 {
     public static class CommonExtensions
     {
