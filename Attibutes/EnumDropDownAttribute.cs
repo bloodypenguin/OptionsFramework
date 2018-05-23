@@ -8,7 +8,7 @@ namespace TreeUnlimiter.OptionsFramework.Attibutes
     [AttributeUsage(AttributeTargets.Property)]
     public class EnumDropDownAttribute : DropDownAttribute
     {
-        public EnumDropDownAttribute(string description, string itemsClass, string group = null, string actionClass = null,
+        public EnumDropDownAttribute(string description, Type itemsClass, string group = null, Type actionClass = null,
             string actionMethod = null) : base(description, group, actionClass, actionMethod)
         {
             ItemsClass = itemsClass;
@@ -16,7 +16,7 @@ namespace TreeUnlimiter.OptionsFramework.Attibutes
 
         public IList<DropDownEntry<int>> GetItems(Func<string, string> translator = null)
         {
-            var type = Util.FindType(ItemsClass);
+            var type = ItemsClass;
             var enumValues = Enum.GetValues(type);
             return (from object enumValue in enumValues
                 let code = (int) enumValue
@@ -27,6 +27,6 @@ namespace TreeUnlimiter.OptionsFramework.Attibutes
                 select new DropDownEntry<int>(code, translatedDesctiption)).ToArray();
         }
 
-        private string ItemsClass { get; }
+        private Type ItemsClass { get; }
     }
 }

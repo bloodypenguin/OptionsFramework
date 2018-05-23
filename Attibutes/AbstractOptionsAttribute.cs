@@ -6,7 +6,7 @@ namespace TreeUnlimiter.OptionsFramework.Attibutes
     [AttributeUsage(AttributeTargets.Property)]
     public abstract class AbstractOptionsAttribute : Attribute
     {
-        protected AbstractOptionsAttribute(string description, string group, string actionClass, string actionMethod)
+        protected AbstractOptionsAttribute(string description, string group, Type actionClass, string actionMethod)
         {
             Description = description;
             Group = group;
@@ -23,7 +23,7 @@ namespace TreeUnlimiter.OptionsFramework.Attibutes
             {
                 return s => { };
             }
-            var method = Util.FindType(ActionClass).GetMethod(ActionMethod, BindingFlags.Public | BindingFlags.Static);
+            var method = ActionClass.GetMethod(ActionMethod, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
             if (method == null)
             {
                 return s => { };
@@ -40,7 +40,7 @@ namespace TreeUnlimiter.OptionsFramework.Attibutes
             {
                 return () => { };
             }
-            var method = Util.FindType(ActionClass).GetMethod(ActionMethod, BindingFlags.Public | BindingFlags.Static);
+            var method = ActionClass.GetMethod(ActionMethod, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
             if (method == null)
             {
                 return () => { };
@@ -51,7 +51,7 @@ namespace TreeUnlimiter.OptionsFramework.Attibutes
             };
         }
 
-        private string ActionClass { get; }
+        private Type ActionClass { get; }
 
         private string ActionMethod { get; }
 
