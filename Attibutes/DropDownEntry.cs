@@ -1,4 +1,4 @@
-﻿namespace OptionsFramework.Attibutes
+﻿namespace TicketPriceCustomizer.OptionsFramework.Attibutes
 {
     public struct DropDownEntry<TKey>
     {

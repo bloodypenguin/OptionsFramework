@@ -1,7 +1,7 @@
 ﻿using System;
-using OptionsFramework.Attibutes;
+using TicketPriceCustomizer.OptionsFramework.Attibutes;
 
-namespace OptionsFramework.Extensions
+namespace TicketPriceCustomizer.OptionsFramework.Extensions
 {
     public static class CommonExtensions
     {

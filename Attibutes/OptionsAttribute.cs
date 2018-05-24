@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OptionsFramework.Attibutes
+namespace TicketPriceCustomizer.OptionsFramework.Attibutes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
     public class OptionsAttribute : Attribute
