@@ -1,4 +1,4 @@
-﻿namespace OptionsFramework.Attibutes
+﻿namespace DaylightClassic.OptionsFramework.Attibutes
 {
     public struct DropDownEntry<TKey>
     {

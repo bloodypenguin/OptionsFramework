@@ -1,7 +1,7 @@
 ﻿using System;
-using OptionsFramework.Attibutes;
+using DaylightClassic.OptionsFramework.Attibutes;
 
-namespace OptionsFramework.Extensions
+namespace DaylightClassic.OptionsFramework.Extensions
 {
     public static class CommonExtensions
     {
