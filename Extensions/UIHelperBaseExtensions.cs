@@ -32,8 +32,8 @@ namespace DlcFlags.OptionsFramework.Extensions
             var groups = new Dictionary<string, UIHelperBase>();
             foreach (var propertyName in properties.ToArray())
             {
-                var description = options.GetPropertyDescription(propertyName);
-                var groupName = options.GetPropertyGroup(propertyName);
+                var description = options.GetOptions().GetPropertyDescription(propertyName);
+                var groupName = options.GetOptions().GetPropertyGroup(propertyName);
                 if (groupName == null)
                 {
                     var component = helper.ProcessProperty<T>(options, propertyName, description, translator);
@@ -117,7 +117,7 @@ namespace DlcFlags.OptionsFramework.Extensions
         private static UIDropDown AddEnumDropdown<T>(this UIHelperBase group, IOptionsWrapper<T> options, string text, string propertyName, EnumDropDownAttribute attr, Func<string, string> translator = null)
         {
             var property = typeof(T).GetProperty(propertyName);
-            var defaultCode = (int)property.GetValue(options, null);
+            var defaultCode = (int)property.GetValue(options.GetOptions(), null);
             int defaultSelection;
             var items = attr.GetItems(translator);
             try
@@ -127,12 +127,12 @@ namespace DlcFlags.OptionsFramework.Extensions
             catch
             {
                 defaultSelection = 0;
-                property.SetValue(options, items.First().Code, null);
+                property.SetValue(options.GetOptions(), items.First().Code, null);
             }
             return (UIDropDown)group.AddDropdown(text, items.Select(kvp => kvp.Description).ToArray(), defaultSelection, sel =>
            {
                var code = items[sel].Code;
-               property.SetValue(options, code, null);
+               property.SetValue(options.GetOptions(), code, null);
                options.SaveOptions();
                attr.Action<int>().Invoke(code);
            });
@@ -141,7 +141,7 @@ namespace DlcFlags.OptionsFramework.Extensions
         private static UIDropDown AddDynamicDropdown<T>(this UIHelperBase group, IOptionsWrapper<T> options, string text, string propertyName, DynamicDropDownAttribute attr, Func<string, string> translator = null)
         {
             var property = typeof(T).GetProperty(propertyName);
-            var defaultCode = (string)property.GetValue(options, null);
+            var defaultCode = (string)property.GetValue(options.GetOptions(), null);
             int defaultSelection;
             var items = attr.GetItems(translator);
             var keys = items.Select(i => i.Code).ToArray();
@@ -157,12 +157,12 @@ namespace DlcFlags.OptionsFramework.Extensions
             if (defaultSelection == -1)
             {
                 defaultSelection = 0;
-                property.SetValue(options, keys.First(), null);
+                property.SetValue(options.GetOptions(), keys.First(), null);
             }
             return (UIDropDown)group.AddDropdown(text, keys.Select(key => dictionary[key]).ToArray(), defaultSelection, sel =>
             {
                 var code = keys[sel];
-                property.SetValue(options, code, null);
+                property.SetValue(options.GetOptions(), code, null);
                 options.SaveOptions();
                 attr.Action<string>().Invoke(code);
             });
@@ -171,10 +171,10 @@ namespace DlcFlags.OptionsFramework.Extensions
         private static UICheckBox AddCheckbox<T>(this UIHelperBase group, IOptionsWrapper<T> options, string text, string propertyName, CheckboxAttribute attr)
         {
             var property = typeof(T).GetProperty(propertyName);
-            return (UICheckBox)group.AddCheckbox(text, (bool)property.GetValue(options, null),
+            return (UICheckBox)group.AddCheckbox(text, (bool)property.GetValue(options.GetOptions(), null),
                 b =>
                 {
-                    property.SetValue(options, b, null);
+                    property.SetValue(options.GetOptions(), b, null);
                     options.SaveOptions();
                     attr.Action<bool>().Invoke(b);
                 });
@@ -202,7 +202,7 @@ namespace DlcFlags.OptionsFramework.Extensions
         private static UITextField AddTextfield<T>(this UIHelperBase group, IOptionsWrapper<T> options, string text, string propertyName, TextfieldAttribute attr)
         {
             var property = typeof(T).GetProperty(propertyName);
-            var initialValue = Convert.ToString(property.GetValue(options, null));
+            var initialValue = Convert.ToString(property.GetValue(options.GetOptions(), null));
             return (UITextField)group.AddTextfield(text, initialValue, s => { },
                 s =>
                 {
@@ -227,7 +227,7 @@ namespace DlcFlags.OptionsFramework.Extensions
                     {
                         value = s; //TODO: more types
                     }
-                    property.SetValue(options, value, null);
+                    property.SetValue(options.GetOptions(), value, null);
                     options.SaveOptions();
                     attr.Action<string>().Invoke(s);
                 });
@@ -250,7 +250,7 @@ namespace DlcFlags.OptionsFramework.Extensions
             }
 
             float finalValue;
-            var value = property.GetValue(options, null);
+            var value = property.GetValue(options.GetOptions(), null);
             if (value is float)
             {
                 finalValue = (float)value;
@@ -272,15 +272,15 @@ namespace DlcFlags.OptionsFramework.Extensions
                 {
                     if (value is float)
                     {
-                        property.SetValue(options, f, null);
+                        property.SetValue(options.GetOptions(), f, null);
                     }
                     else if (value is byte)
                     {
-                        property.SetValue(options, (byte)Math.Round(f, MidpointRounding.AwayFromZero), null);
+                        property.SetValue(options.GetOptions(), (byte)Math.Round(f, MidpointRounding.AwayFromZero), null);
                     }
                     else if (value is int)
                     {
-                        property.SetValue(options, (int)Math.Round(f, MidpointRounding.AwayFromZero), null);
+                        property.SetValue(options.GetOptions(), (int)Math.Round(f, MidpointRounding.AwayFromZero), null);
                     }
                     options.SaveOptions();
                     attr.Action<float>().Invoke(f);
