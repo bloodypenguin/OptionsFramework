@@ -14,7 +14,8 @@ namespace OptionsFramework.Extensions
 {
     public static class UIHelperBaseExtensions
     {
-        public static IEnumerable<UIComponent> AddOptionsGroup<T>(this UIHelperBase helper, Func<string, string> translator = null)
+        public static IEnumerable<UIComponent> AddOptionsGroup<T>(this UIHelperBase helper, IOptionsWrapper<T> options,
+            Func<string, string> translator = null)
         {
             var result = new List<UIComponent>();
             var properties = from property in typeof(T).GetProperties().Where(p =>
@@ -31,11 +32,11 @@ namespace OptionsFramework.Extensions
             var groups = new Dictionary<string, UIHelperBase>();
             foreach (var propertyName in properties.ToArray())
             {
-                var description = OptionsWrapper<T>.Options.GetPropertyDescription(propertyName);
-                var groupName = OptionsWrapper<T>.Options.GetPropertyGroup(propertyName);
+                var description = options.GetPropertyDescription(propertyName);
+                var groupName = options.GetPropertyGroup(propertyName);
                 if (groupName == null)
                 {
-                    var component = helper.ProcessProperty<T>(propertyName, description, translator);
+                    var component = helper.ProcessProperty<T>(options, propertyName, description, translator);
                     if (component != null)
                     {
                         result.Add(component);
@@ -51,7 +52,7 @@ namespace OptionsFramework.Extensions
                     {
                         groups[groupName] = helper.AddGroup(groupName);
                     }
-                    var component = groups[groupName].ProcessProperty<T>(propertyName, description, translator);
+                    var component = groups[groupName].ProcessProperty<T>(options, propertyName, description, translator);
                     if (component != null)
                     {
                         result.Add(component);
@@ -61,51 +62,51 @@ namespace OptionsFramework.Extensions
             return result;
         }
 
-        private static UIComponent ProcessProperty<T>(this UIHelperBase group, string propertyName, string description, Func<string, string> translator = null)
+        private static UIComponent ProcessProperty<T>(this UIHelperBase group, IOptionsWrapper<T> options, string propertyName, string description, Func<string, string> translator = null)
         {
             if (translator != null)
             {
                 description = translator.Invoke(description);
             }
             UIComponent component = null;
-            var checkboxAttribute = OptionsWrapper<T>.Options.GetAttribute<T, CheckboxAttribute>(propertyName);
+            var checkboxAttribute = options.GetOptions().GetAttribute<T, CheckboxAttribute>(propertyName);
             if (checkboxAttribute != null)
             {
-                component = group.AddCheckbox<T>(description, propertyName, checkboxAttribute);
+                component = group.AddCheckbox<T>(options, description, propertyName, checkboxAttribute);
             }
-            var textfieldAttribute = OptionsWrapper<T>.Options.GetAttribute<T, TextfieldAttribute>(propertyName);
+            var textfieldAttribute = options.GetOptions().GetAttribute<T, TextfieldAttribute>(propertyName);
             if (textfieldAttribute != null)
             {
-                component = group.AddTextfield<T>(description, propertyName, textfieldAttribute);
+                component = group.AddTextfield<T>(options, description, propertyName, textfieldAttribute);
             }
-            var enumDropDownAttribute = OptionsWrapper<T>.Options.GetAttribute<T, EnumDropDownAttribute>(propertyName);
+            var enumDropDownAttribute = options.GetOptions().GetAttribute<T, EnumDropDownAttribute>(propertyName);
             if (enumDropDownAttribute != null)
             {
-                component = group.AddEnumDropdown<T>(description, propertyName, enumDropDownAttribute, translator);
+                component = group.AddEnumDropdown<T>(options, description, propertyName, enumDropDownAttribute, translator);
             }
-            var dynamicDropDownAttribute = OptionsWrapper<T>.Options.GetAttribute<T, DynamicDropDownAttribute>(propertyName);
+            var dynamicDropDownAttribute = options.GetOptions().GetAttribute<T, DynamicDropDownAttribute>(propertyName);
             if (dynamicDropDownAttribute != null)
             {
-                component = group.AddDynamicDropdown<T>(description, propertyName, dynamicDropDownAttribute, translator);
+                component = group.AddDynamicDropdown<T>(options, description, propertyName, dynamicDropDownAttribute, translator);
             }
-            var sliderAttribute = OptionsWrapper<T>.Options.GetAttribute<T, SliderAttribute>(propertyName);
+            var sliderAttribute = options.GetOptions().GetAttribute<T, SliderAttribute>(propertyName);
             if (sliderAttribute != null)
             {
-                component = group.AddSlider<T>(description, propertyName, sliderAttribute);
+                component = group.AddSlider<T>(options, description, propertyName, sliderAttribute);
             }
-            var buttonAttribute = OptionsWrapper<T>.Options.GetAttribute<T, ButtonAttribute>(propertyName);
+            var buttonAttribute = options.GetOptions().GetAttribute<T, ButtonAttribute>(propertyName);
             if (buttonAttribute != null)
             {
                 component = group.AddButton<T>(description, buttonAttribute);
             }
-            var labelAttribute = OptionsWrapper<T>.Options.GetAttribute<T, LabelAttribute>(propertyName);
+            var labelAttribute = options.GetOptions().GetAttribute<T, LabelAttribute>(propertyName);
             if (labelAttribute != null)
             {
                 component = group.AddLabel<T>(description);
             }
             //TODO: more control types
 
-            var descriptionAttribute = OptionsWrapper<T>.Options.GetAttribute<T, DescriptionAttribute>(propertyName);
+            var descriptionAttribute = options.GetOptions().GetAttribute<T, DescriptionAttribute>(propertyName);
             if (component != null && descriptionAttribute != null)
             {
                 component.tooltip = (translator == null || descriptionAttribute is DontTranslateDescriptionAttribute) ? descriptionAttribute.Description : translator.Invoke(descriptionAttribute.Description);
@@ -113,10 +114,10 @@ namespace OptionsFramework.Extensions
             return component;
         }
 
-        private static UIDropDown AddEnumDropdown<T>(this UIHelperBase group, string text, string propertyName, EnumDropDownAttribute attr, Func<string, string> translator = null)
+        private static UIDropDown AddEnumDropdown<T>(this UIHelperBase group, IOptionsWrapper<T> options, string text, string propertyName, EnumDropDownAttribute attr, Func<string, string> translator = null)
         {
             var property = typeof(T).GetProperty(propertyName);
-            var defaultCode = (int)property.GetValue(OptionsWrapper<T>.Options, null);
+            var defaultCode = (int)property.GetValue(options, null);
             int defaultSelection;
             var items = attr.GetItems(translator);
             try
@@ -126,21 +127,21 @@ namespace OptionsFramework.Extensions
             catch
             {
                 defaultSelection = 0;
-                property.SetValue(OptionsWrapper<T>.Options, items.First().Code, null);
+                property.SetValue(options, items.First().Code, null);
             }
             return (UIDropDown)group.AddDropdown(text, items.Select(kvp => kvp.Description).ToArray(), defaultSelection, sel =>
            {
                var code = items[sel].Code;
-               property.SetValue(OptionsWrapper<T>.Options, code, null);
-               OptionsWrapper<T>.SaveOptions();
+               property.SetValue(options, code, null);
+               options.SaveOptions();
                attr.Action<int>().Invoke(code);
            });
         }
 
-        private static UIDropDown AddDynamicDropdown<T>(this UIHelperBase group, string text, string propertyName, DynamicDropDownAttribute attr, Func<string, string> translator = null)
+        private static UIDropDown AddDynamicDropdown<T>(this UIHelperBase group, IOptionsWrapper<T> options, string text, string propertyName, DynamicDropDownAttribute attr, Func<string, string> translator = null)
         {
             var property = typeof(T).GetProperty(propertyName);
-            var defaultCode = (string)property.GetValue(OptionsWrapper<T>.Options, null);
+            var defaultCode = (string)property.GetValue(options, null);
             int defaultSelection;
             var items = attr.GetItems(translator);
             var keys = items.Select(i => i.Code).ToArray();
@@ -156,25 +157,25 @@ namespace OptionsFramework.Extensions
             if (defaultSelection == -1)
             {
                 defaultSelection = 0;
-                property.SetValue(OptionsWrapper<T>.Options, keys.First(), null);
+                property.SetValue(options, keys.First(), null);
             }
             return (UIDropDown)group.AddDropdown(text, keys.Select(key => dictionary[key]).ToArray(), defaultSelection, sel =>
             {
                 var code = keys[sel];
-                property.SetValue(OptionsWrapper<T>.Options, code, null);
-                OptionsWrapper<T>.SaveOptions();
+                property.SetValue(options, code, null);
+                options.SaveOptions();
                 attr.Action<string>().Invoke(code);
             });
         }
 
-        private static UICheckBox AddCheckbox<T>(this UIHelperBase group, string text, string propertyName, CheckboxAttribute attr)
+        private static UICheckBox AddCheckbox<T>(this UIHelperBase group, IOptionsWrapper<T> options, string text, string propertyName, CheckboxAttribute attr)
         {
             var property = typeof(T).GetProperty(propertyName);
-            return (UICheckBox)group.AddCheckbox(text, (bool)property.GetValue(OptionsWrapper<T>.Options, null),
+            return (UICheckBox)group.AddCheckbox(text, (bool)property.GetValue(options, null),
                 b =>
                 {
-                    property.SetValue(OptionsWrapper<T>.Options, b, null);
-                    OptionsWrapper<T>.SaveOptions();
+                    property.SetValue(options, b, null);
+                    options.SaveOptions();
                     attr.Action<bool>().Invoke(b);
                 });
         }
@@ -198,10 +199,10 @@ namespace OptionsFramework.Extensions
             return valueLabel;
         }
 
-        private static UITextField AddTextfield<T>(this UIHelperBase group, string text, string propertyName, TextfieldAttribute attr)
+        private static UITextField AddTextfield<T>(this UIHelperBase group, IOptionsWrapper<T> options, string text, string propertyName, TextfieldAttribute attr)
         {
             var property = typeof(T).GetProperty(propertyName);
-            var initialValue = Convert.ToString(property.GetValue(OptionsWrapper<T>.Options, null));
+            var initialValue = Convert.ToString(property.GetValue(options, null));
             return (UITextField)group.AddTextfield(text, initialValue, s => { },
                 s =>
                 {
@@ -226,13 +227,13 @@ namespace OptionsFramework.Extensions
                     {
                         value = s; //TODO: more types
                     }
-                    property.SetValue(OptionsWrapper<T>.Options, value, null);
-                    OptionsWrapper<T>.SaveOptions();
+                    property.SetValue(options, value, null);
+                    options.SaveOptions();
                     attr.Action<string>().Invoke(s);
                 });
         }
 
-        private static UISlider AddSlider<T>(this UIHelperBase group, string text, string propertyName, SliderAttribute attr)
+        private static UISlider AddSlider<T>(this UIHelperBase group, IOptionsWrapper<T> options, string text, string propertyName, SliderAttribute attr)
         {
             var property = typeof(T).GetProperty(propertyName);
             UILabel valueLabel = null;
@@ -249,7 +250,7 @@ namespace OptionsFramework.Extensions
             }
 
             float finalValue;
-            var value = property.GetValue(OptionsWrapper<T>.Options, null);
+            var value = property.GetValue(options, null);
             if (value is float)
             {
                 finalValue = (float)value;
@@ -271,17 +272,17 @@ namespace OptionsFramework.Extensions
                 {
                     if (value is float)
                     {
-                        property.SetValue(OptionsWrapper<T>.Options, f, null);
+                        property.SetValue(options, f, null);
                     }
                     else if (value is byte)
                     {
-                        property.SetValue(OptionsWrapper<T>.Options, (byte)Math.Round(f, MidpointRounding.AwayFromZero), null);
+                        property.SetValue(options, (byte)Math.Round(f, MidpointRounding.AwayFromZero), null);
                     }
                     else if (value is int)
                     {
-                        property.SetValue(OptionsWrapper<T>.Options, (int)Math.Round(f, MidpointRounding.AwayFromZero), null);
+                        property.SetValue(options, (int)Math.Round(f, MidpointRounding.AwayFromZero), null);
                     }
-                    OptionsWrapper<T>.SaveOptions();
+                    options.SaveOptions();
                     attr.Action<float>().Invoke(f);
                     if (valueLabel != null)
                     {
