@@ -3,9 +3,9 @@
 namespace OptionsFramework.Attibutes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
-    public class OptionsAttribute : Attribute
+    public class XmlOptionsAttribute : Attribute
     {
-        public OptionsAttribute(string fileName, string legacyFileName = "")
+        public XmlOptionsAttribute(string fileName, string legacyFileName = "")
         {
             FileName = fileName;
             LegacyFileName = legacyFileName;

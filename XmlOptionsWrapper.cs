@@ -53,7 +53,7 @@ namespace OptionsFramework
                 return;
             }
             var type = typeof(T);
-            var attrs = type.GetCustomAttributes(typeof(OptionsAttribute), false);
+            var attrs = type.GetCustomAttributes(typeof(XmlOptionsAttribute), false);
             if (attrs.Length != 1)
             {
                 throw new Exception($"Type {type.FullName} is not an options type!");
@@ -118,8 +118,8 @@ namespace OptionsFramework
         private string GetFileName()
         {
             var type = _options.GetType();
-            var attrs = type.GetCustomAttributes(typeof(OptionsAttribute), false);
-            var fileName = Path.Combine(DataLocation.localApplicationData, ((OptionsAttribute) attrs[0]).FileName);
+            var attrs = type.GetCustomAttributes(typeof(XmlOptionsAttribute), false);
+            var fileName = Path.Combine(DataLocation.localApplicationData, ((XmlOptionsAttribute) attrs[0]).FileName);
             if (!fileName.EndsWith(".xml"))
             {
                 fileName = fileName + ".xml";
@@ -130,8 +130,8 @@ namespace OptionsFramework
         private string GetLegacyFileName()
         {
             var type = _options.GetType();
-            var attrs = type.GetCustomAttributes(typeof(OptionsAttribute), false);
-            var fileName =  ((OptionsAttribute)attrs[0]).LegacyFileName;
+            var attrs = type.GetCustomAttributes(typeof(XmlOptionsAttribute), false);
+            var fileName =  ((XmlOptionsAttribute)attrs[0]).LegacyFileName;
             if (fileName == string.Empty)
             {
                 return fileName;
