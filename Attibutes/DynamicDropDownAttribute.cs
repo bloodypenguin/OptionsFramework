@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 
-namespace OptionsFramework.Attibutes
+namespace DlcFlags.OptionsFramework.Attibutes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class DynamicDropDownAttribute : DropDownAttribute

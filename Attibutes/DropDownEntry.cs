@@ -1,4 +1,4 @@
-﻿namespace OptionsFramework.Attibutes
+﻿namespace DlcFlags.OptionsFramework.Attibutes
 {
     public struct DropDownEntry<TKey>
     {

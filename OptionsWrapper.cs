@@ -1,4 +1,4 @@
-﻿namespace OptionsFramework
+﻿namespace DlcFlags.OptionsFramework
 {
     public interface IOptionsWrapper<out T>
     {

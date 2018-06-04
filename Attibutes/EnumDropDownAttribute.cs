@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
-namespace OptionsFramework.Attibutes
+namespace DlcFlags.OptionsFramework.Attibutes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class EnumDropDownAttribute : DropDownAttribute

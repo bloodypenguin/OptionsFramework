@@ -1,7 +1,7 @@
 ﻿using System;
-using OptionsFramework.Attibutes;
+using DlcFlags.OptionsFramework.Attibutes;
 
-namespace OptionsFramework.Extensions
+namespace DlcFlags.OptionsFramework.Extensions
 {
     public static class CommonExtensions
     {
