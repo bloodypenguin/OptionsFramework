@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace OptionsFramework.Attibutes
+namespace ChangeLoadingImage.OptionsFramework.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public abstract class AbstractOptionsAttribute : Attribute

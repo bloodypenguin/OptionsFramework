@@ -2,11 +2,11 @@
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
+using ChangeLoadingImage.OptionsFramework.Attributes;
 using ColossalFramework.IO;
-using OptionsFramework.Attibutes;
 using UnityEngine;
 
-namespace OptionsFramework
+namespace ChangeLoadingImage.OptionsFramework
 {
     public class XmlOptionsWrapper<T> : IOptionsWrapper<T>
     {

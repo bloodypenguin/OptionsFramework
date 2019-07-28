@@ -30,16 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Attibutes\AbstractOptionsAttribute.cs" />
-    <Compile Include="Attibutes\ButtonAttribute.cs" />
-    <Compile Include="Attibutes\CheckboxAttribute.cs" />
-    <Compile Include="Attibutes\DontTranslateDescriptionAttribute.cs" />
-    <Compile Include="Attibutes\DropDownAttribute.cs" />
-    <Compile Include="Attibutes\HideConditionAttribute.cs" />
-    <Compile Include="Attibutes\LabelAttribute.cs" />
-    <Compile Include="Attibutes\OptionsAttribute.cs" />
-    <Compile Include="Attibutes\SliderAttribute.cs" />
-    <Compile Include="Attibutes\TextFieldAttribute.cs" />
+    <Compile Include="Attributes\AbstractOptionsAttribute.cs" />
+    <Compile Include="Attributes\ButtonAttribute.cs" />
+    <Compile Include="Attributes\CheckboxAttribute.cs" />
+    <Compile Include="Attributes\DontTranslateDescriptionAttribute.cs" />
+    <Compile Include="Attributes\DropDownAttribute.cs" />
+    <Compile Include="Attributes\HideConditionAttribute.cs" />
+    <Compile Include="Attributes\LabelAttribute.cs" />
+    <Compile Include="Attributes\OptionsAttribute.cs" />
+    <Compile Include="Attributes\SliderAttribute.cs" />
+    <Compile Include="Attributes\TextFieldAttribute.cs" />
     <Compile Include="Extensions\CommonExtensions.cs" />
     <Compile Include="Extensions\UIHelperBaseExtensions.cs" />
     <Compile Include="OptionsWrapper.cs" />

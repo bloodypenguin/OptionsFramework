@@ -1,7 +1,7 @@
 ﻿using System;
-using OptionsFramework.Attibutes;
+using ChangeLoadingImage.OptionsFramework.Attributes;
 
-namespace OptionsFramework.Extensions
+namespace ChangeLoadingImage.OptionsFramework.Extensions
 {
     public static class CommonExtensions
     {

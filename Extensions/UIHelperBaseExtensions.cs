@@ -6,11 +6,11 @@ using System.Linq;
 using System.Reflection;
 using ColossalFramework.Plugins;
 using ColossalFramework.UI;
-using OptionsFramework.Attibutes;
+using ChangeLoadingImage.OptionsFramework.Attributes;
 using ICities;
 using UnityEngine;
 
-namespace OptionsFramework.Extensions
+namespace ChangeLoadingImage.OptionsFramework.Extensions
 {
     public static class UIHelperBaseExtensions
     {

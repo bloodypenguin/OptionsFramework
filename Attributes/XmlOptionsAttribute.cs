@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OptionsFramework.Attibutes
+namespace ChangeLoadingImage.OptionsFramework.Attributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
     public class XmlOptionsAttribute : Attribute

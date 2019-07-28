@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 
-namespace OptionsFramework.Attibutes
+namespace ChangeLoadingImage.OptionsFramework.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class DynamicDropDownAttribute : DropDownAttribute

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
-namespace OptionsFramework.Attibutes
+namespace ChangeLoadingImage.OptionsFramework.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class EnumDropDownAttribute : DropDownAttribute

@@ -1,4 +1,4 @@
-﻿namespace OptionsFramework
+﻿namespace ChangeLoadingImage.OptionsFramework
 {
     public interface IOptionsWrapper<out T>
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using ColossalFramework;
 
-namespace OptionsFramework.Attibutes
+namespace ChangeLoadingImage.OptionsFramework.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public abstract class DropDownAttribute : AbstractOptionsAttribute

@@ -1,4 +1,4 @@
-﻿namespace OptionsFramework.Attibutes
+﻿namespace ChangeLoadingImage.OptionsFramework.Attributes
 {
     public struct DropDownEntry<TKey>
     {
