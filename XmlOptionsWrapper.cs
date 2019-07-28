@@ -11,10 +11,10 @@ namespace OptionsFramework
     public class XmlOptionsWrapper<T> : IOptionsWrapper<T>
     {
         private T _options;
-        private static readonly XmlOptionsWrapper<T> _instance = new XmlOptionsWrapper<T>();
 
-        public static XmlOptionsWrapper<T> Instance => _instance;
-        public static T Options => _instance.GetOptions();
+        public static XmlOptionsWrapper<T> Instance { get; } = new XmlOptionsWrapper<T>();
+
+        public static T Options => Instance.GetOptions();
         
         public T GetOptions()
         {
@@ -44,6 +44,11 @@ namespace OptionsFramework
             {
                 Debug.LogException(e);
             }
+        }
+
+        private XmlOptionsWrapper()
+        {
+            
         }
         
         private void Ensure()
