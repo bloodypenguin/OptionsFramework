@@ -215,20 +215,19 @@ namespace ImprovedPublicTransport2.OptionsFramework.Extensions
 
             float finalValue;
             var value = property.GetValue(OptionsWrapper<T>.Options, null);
-            if (value is float)
+            switch (value)
             {
-                finalValue = (float)value;
-            } else if (value is byte)
-            {
-                finalValue = (byte) value;
-            }
-            else if (value is int)
-            {
-                finalValue = (int)value;
-            }
-            else
-            {
-                throw new Exception("Unsupported numeric type for slider!");
+                case float f:
+                    finalValue = f;
+                    break;
+                case byte b:
+                    finalValue = b;
+                    break;
+                case int i:
+                    finalValue = i;
+                    break;
+                default:
+                    throw new Exception("Unsupported numeric type for slider!");
             }
 
             var slider = (UISlider)group.AddSlider(text, attr.Min, attr.Max, attr.Step, Mathf.Clamp(finalValue, attr.Min, attr.Max),
