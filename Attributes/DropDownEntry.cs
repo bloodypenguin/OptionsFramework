@@ -1,4 +1,4 @@
-﻿namespace SkyboxReplacer.OptionsFramework.Attibutes
+﻿namespace TouristTaxiBooster.OptionsFramework.Attributes
 {
     public struct DropDownEntry<TKey>
     {

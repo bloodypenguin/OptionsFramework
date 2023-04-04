@@ -1,7 +1,7 @@
 ﻿using System;
-using OptionsFramework.Attibutes;
+using TouristTaxiBooster.OptionsFramework.Attributes;
 
-namespace OptionsFramework.Extensions
+namespace TouristTaxiBooster.OptionsFramework.Extensions
 {
     public static class CommonExtensions
     {

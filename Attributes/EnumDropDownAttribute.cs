@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using TouristTaxiBooster.OptionsFramework.Attributes;
 
-namespace SkyboxReplacer.OptionsFramework.Attibutes
+namespace TouristTaxiBooster.OptionsFramework.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class EnumDropDownAttribute : DropDownAttribute

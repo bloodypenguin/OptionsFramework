@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using TouristTaxiBooster.OptionsFramework.Attributes;
 
-namespace SkyboxReplacer.OptionsFramework.Attibutes
+namespace TouristTaxiBooster.OptionsFramework.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class DynamicDropDownAttribute : DropDownAttribute

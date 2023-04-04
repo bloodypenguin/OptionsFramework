@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OptionsFramework.Attibutes
+namespace TouristTaxiBooster.OptionsFramework.Attributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
     public class OptionsAttribute : Attribute

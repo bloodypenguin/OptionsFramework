@@ -4,13 +4,12 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using ColossalFramework.Plugins;
 using ColossalFramework.UI;
-using OptionsFramework.Attibutes;
 using ICities;
+using TouristTaxiBooster.OptionsFramework.Attributes;
 using UnityEngine;
 
-namespace OptionsFramework.Extensions
+namespace TouristTaxiBooster.OptionsFramework.Extensions
 {
     public static class UIHelperBaseExtensions
     {
