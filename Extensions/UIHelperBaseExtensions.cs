@@ -246,7 +246,18 @@ namespace ImprovedPublicTransport2.OptionsFramework.Extensions
                         property.SetValue(OptionsWrapper<T>.Options, (int)Math.Round(f, MidpointRounding.AwayFromZero), null);
                     }
                     OptionsWrapper<T>.SaveOptions();
-                    attr.Action<float>().Invoke(f);
+                    if (value is float)
+                    {
+                        attr.Action<float>().Invoke(f);
+                    }
+                    else if (value is byte)
+                    {
+                        attr.Action<byte>().Invoke((byte)Math.Round(f, MidpointRounding.AwayFromZero));
+                    }
+                    else if (value is int)
+                    {
+                        attr.Action<int>().Invoke((int)Math.Round(f, MidpointRounding.AwayFromZero));
+                    }
                     if (valueLabel != null)
                     {
                         valueLabel.text = f.ToString(CultureInfo.InvariantCulture);
